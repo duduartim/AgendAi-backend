@@ -26,7 +26,11 @@ app.get('/', (req, res) => {
   res.send('Servidor rodando e conectado ao MongoDB!');
 });
 
-// Health Check
+// Health Check (para Render)
 app.get('/healthz', (req, res) => res.send('OK'));
 
-module.exports = app;
+// Porta dinâmica para Render ou fallback local
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`🚀 Servidor rodando na porta ${PORT}`);
+});
