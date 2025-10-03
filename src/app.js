@@ -1,0 +1,32 @@
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+
+const app = express();
+
+// Middlewares
+app.use(express.json());
+app.use(cors());
+
+// URI do MongoDB
+const uri = "mongodb+srv://lucasduarterocha11_db_user:duduartim64@cluster0.eoripif.mongodb.net/agendai?retryWrites=true&w=majority&appName=Cluster0";
+
+// Conexão com o MongoDB
+mongoose.connect(uri)
+  .then(() => console.log('✅ MongoDB conectado com sucesso!'))
+  .catch(err => console.error('❌ Erro ao conectar no MongoDB:', err));
+
+// Rotas
+app.use('/pacientes', require('./routes/pacientes'));
+app.use('/login', require('./routes/login'));
+app.use('/agendamento', require('./routes/agendamento.routes'));
+
+// Rota raiz de teste
+app.get('/', (req, res) => {
+  res.send('Servidor rodando e conectado ao MongoDB!');
+});
+
+// Health Check
+app.get('/healthz', (req, res) => res.send('OK'));
+
+module.exports = app;
