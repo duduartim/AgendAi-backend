@@ -1,4 +1,3 @@
-
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -17,10 +16,10 @@ mongoose.connect(uri)
   .then(() => console.log('✅ MongoDB conectado com sucesso!'))
   .catch(err => console.error('❌ Erro ao conectar no MongoDB:', err));
 
-// Rotas (ajustadas para dentro de src/routes)
-app.use('/pacientes', require('./src/routes/pacientes'));
-app.use('/login', require('./src/routes/login'));
-app.use('/agendamento', require('./src/routes/agendamento.routes'));
+// Rotas (caminhos corrigidos)
+app.use('/pacientes', require('./routes/pacientes'));
+app.use('/login', require('./routes/login'));
+app.use('/agendamento', require('./routes/agendamento.routes'));
 
 // Rota raiz de teste
 app.get('/', (req, res) => {
